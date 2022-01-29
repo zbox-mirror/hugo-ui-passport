@@ -4,9 +4,9 @@
 {{ $version := ((.version) | default "") }}
 {{ $owner := ((.owner) | default "") }}
 {{ $lang := ((.language) | default "ru") }}
-{{ $user_agent := (dict "User-Agent" ((.user_agent) | default "")) }}
+{{ $headers := ((.headers) | default "") }}
 
-{{ $wall := (getJSON "https://api.vk.com/method/wall.get?owner_id=-" ($owner) "&lang=" ($lang) "&access_token=" ($token) "&v=" ($version) ($user_agent)) }}
+{{ $wall := (getJSON "https://api.vk.com/method/wall.get?owner_id=-" ($owner) "&lang=" ($lang) "&access_token=" ($token) "&v=" ($version) ($headers)) }}
 
 {{ with ($wall) }}
 

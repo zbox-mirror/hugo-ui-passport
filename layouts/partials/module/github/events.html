@@ -1,7 +1,10 @@
-{{ $user_agent := (dict "User-Agent" (($.Site.Params.user_agent) | default "")) }}
-{{ $token := ((dict "Authorization" (printf "token %s" (($.Site.Data.api.github.token) | base64Decode))) | default "") }}
 {{ $user := (($.Site.Data.api.github.user) | default "") }}
-{{ $events := (getJSON "https://api.github.com/users/" ($user) "/events/public" ($token) ($user_agent)) }}
+{{ $headers := (dict
+"User-Agent" (($.Site.Params.user_agent) | default "")
+"Authorization" (printf "token %s" (($.Site.Data.api.github.token) | base64Decode))
+) }}
+
+{{ $events := (getJSON "https://api.github.com/users/" ($user) "/events/public" ($headers)) }}
 
 <article>
   <h2 id="events" class="text-center text-uppercase border-bottom pb-1 mb-3">

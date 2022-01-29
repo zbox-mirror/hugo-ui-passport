@@ -1,10 +1,13 @@
-{{ $user_agent := (dict "User-Agent" (($.Site.Params.user_agent) | default "")) }}
 {{ $token := ((($.Site.Data.api.vk.token) | base64Decode) | default "") }}
 {{ $version := (($.Site.Data.api.vk.version) | default "") }}
 {{ $group_id := (($.Site.Data.api.vk.group.id) | default "") }}
 {{ $group_fields := (($.Site.Data.api.vk.group.fields) | default "") }}
 {{ $lang := ((.Lang) | default "ru") }}
-{{ $groups := (getJSON "https://api.vk.com/method/groups.getById?group_ids=" ($group_id) "&fields=" ($group_fields) "&lang=" ($lang) "&access_token=" ($token) "&v=" ($version) ($user_agent)) }}
+{{ $headers := (dict
+"User-Agent" (($.Site.Params.user_agent) | default "")
+) }}
+
+{{ $groups := (getJSON "https://api.vk.com/method/groups.getById?group_ids=" ($group_id) "&fields=" ($group_fields) "&lang=" ($lang) "&access_token=" ($token) "&v=" ($version) ($headers)) }}
 
 <article>
   <h2 id="groups" class="text-center text-uppercase border-bottom pb-1 mb-3">
@@ -85,7 +88,7 @@
               "version" ($version)
               "owner" ((.id) | int)
               "language" ($lang)
-              "user_agent" ($user_agent)
+              "headers" ($headers)
               )) }}
 
           {{ end }}

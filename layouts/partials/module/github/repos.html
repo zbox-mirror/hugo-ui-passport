@@ -1,7 +1,10 @@
-{{ $user_agent := (dict "User-Agent" (($.Site.Params.user_agent) | default "")) }}
-{{ $token := ((dict "Authorization" (printf "token %s" (($.Site.Data.api.github.token) | base64Decode))) | default "") }}
 {{ $user := (($.Site.Data.api.github.user) | default "") }}
-{{ $repos := (getJSON "https://api.github.com/users/" ($user) "/repos" ($token) ($user_agent)) }}
+{{ $headers := (dict
+"User-Agent" (($.Site.Params.user_agent) | default "")
+"Authorization" (printf "token %s" (($.Site.Data.api.github.token) | base64Decode))
+) }}
+
+{{ $repos := (getJSON "https://api.github.com/users/" ($user) "/repos" ($headers)) }}
 
 <article>
   <h2 id="repos" class="text-center text-uppercase border-bottom pb-1 mb-3">
@@ -68,7 +71,7 @@
                       {{ end }}
 
                       {{ if (.license) }}
-                          {{ $license := (getJSON (.license.url) ($token)) }}
+                          {{ $license := (getJSON (.license.url) ($headers)) }}
                           <li title='{{ i18n "github.license" }}' class="list-inline-item">
                             <a class="btn btn-light btn-sm text-muted" href="{{ ($license.html_url) }}" target="_blank" rel="noopener noreferrer" role="button">
                               <i class="fas fa-copyright fa-fw me-1"></i>
@@ -94,10 +97,9 @@
             "type" "repos"
             "id" (.name)
             "title" (.name)
-            "token" ($token)
             "user" (.owner.login)
             "repo" (.name)
-            "user_agent" ($user_agent)
+            "headers" ($headers)
             )) }}
 
           {{ end }}

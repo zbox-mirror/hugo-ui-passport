@@ -1,7 +1,11 @@
-{{ $user_agent := (dict "User-Agent" (($.Site.Params.user_agent) | default "")) }}
-{{ $token := ((dict "Authorization" (printf "token %s" (($.Site.Data.api.github.token) | base64Decode))) | default "") }}
 {{ $user := (($.Site.Data.api.github.user) | default "") }}
-{{ $orgs := (getJSON "https://api.github.com/users/" ($user) "/orgs" ($token) ($user_agent)) }}
+{{ $headers := (dict
+"User-Agent" (($.Site.Params.user_agent) | default "")
+"Authorization" (printf "token %s" (($.Site.Data.api.github.token) | base64Decode))
+) }}
+
+
+{{ $orgs := (getJSON "https://api.github.com/users/" ($user) "/orgs" ($headers)) }}
 
 <article>
   <h2 id="orgs" class="text-center text-uppercase border-bottom pb-1 mb-3">
@@ -14,7 +18,7 @@
 
           {{ range . }}
 
-              {{ $org := (getJSON "https://api.github.com/orgs/" (.login) ($token)) }}
+              {{ $org := (getJSON "https://api.github.com/orgs/" (.login) ($headers)) }}
               <div class="col">
                 <article class="card h-100">
                   <h5 class="card-header">
@@ -91,9 +95,8 @@
               "type" "orgs"
               "id" ($org.login)
               "title" (($org.name) | default ($org.login))
-              "token" ($token)
               "org" ($org.login)
-              "user_agent" ($user_agent)
+              "headers" ($headers)
               )) }}
 
           {{ end }}

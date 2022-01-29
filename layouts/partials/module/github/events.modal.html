@@ -1,19 +1,18 @@
 {{ $type := ((.type) | default "") }}
 {{ $id := ((.id) | default "") }}
 {{ $title := ((.title) | default "") }}
-{{ $token := ((.token) | default "") }}
 {{ $user := ((.user) | default "") }}
 {{ $repo := ((.repo) | default "") }}
 {{ $org := ((.org) | default "") }}
 {{ $events := ("") }}
-{{ $user_agent := (dict "User-Agent" ((.user_agent) | default "")) }}
+{{ $headers := ((.headers) | default "") }}
 
 {{ if (eq ($type) ("orgs")) }}
-    {{ $events = (getJSON "https://api.github.com/orgs/" ($org) "/events" ($token) ($user_agent)) }}
+    {{ $events = (getJSON "https://api.github.com/orgs/" ($org) "/events" ($headers)) }}
 {{ end }}
 
 {{ if (eq ($type) ("repos")) }}
-    {{ $events = (getJSON "https://api.github.com/repos/" ($user) "/" ($repo) "/events" ($token) ($user_agent)) }}
+    {{ $events = (getJSON "https://api.github.com/repos/" ($user) "/" ($repo) "/events" ($headers)) }}
 {{ end }}
 
 {{ with ($events) }}
