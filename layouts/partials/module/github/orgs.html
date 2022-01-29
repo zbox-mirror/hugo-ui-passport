@@ -1,0 +1,103 @@
+{{ $token := ((dict "Authorization" (printf "token %s" (($.Site.Data.api.github.token) | base64Decode))) | default "") }}
+{{ $user := (($.Site.Data.api.github.user) | default "") }}
+{{ $orgs := (getJSON "https://api.github.com/users/" ($user) "/orgs" ($token)) }}
+
+<article>
+  <h2 id="orgs" class="text-center text-uppercase border-bottom pb-1 mb-3">
+    <a href="#orgs">{{ (i18n "github.orgs") }}</a>
+  </h2>
+
+    {{ with ($orgs) }}
+
+      <div class="row row-cols-1 row-cols-lg-2 g-3">
+
+          {{ range . }}
+
+              {{ $org := (getJSON "https://api.github.com/orgs/" (.login) ($token)) }}
+              <div class="col">
+                <article class="card h-100">
+                  <h5 class="card-header">
+                    <a href="{{ ($org.html_url) }}" target="_blank" rel="noopener noreferrer">
+                        {{ (($org.name) | default ($org.login)) }}
+                    </a>
+                  </h5>
+                  <div class="row g-0 h-100">
+                    <div class="col-4">
+                      <div class="node-cover text-center p-3">
+                        <img src="{{ ($org.avatar_url) }}" class="img-fluid rounded" alt="{{ (($org.name) | default ($org.login)) }}" loading="lazy"/>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="card-body">
+                        <div class="node-body">
+                          <p class="card-text">
+                              {{ (($org.description) | markdownify) }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-muted">
+                    <ul class="list-inline m-0">
+                      <li title='{{ i18n "github.repos" }}' class="list-inline-item">
+                        <a class="btn btn-light btn-sm text-muted" href="{{ ($org.html_url) }}" target="_blank" rel="noopener noreferrer" role="button">
+                          <i class="fas fa-book fa-fw me-1"></i>
+                            {{ ($org.public_repos) }}
+                        </a>
+                      </li>
+
+                        {{ with ($org.blog) }}
+                          <li title='{{ i18n "github.blog" }}' class="list-inline-item">
+                              {{ $url := (urls.Parse .) }}
+                              {{ $scheme := "http://" }}
+                              {{ if ($url.Scheme) }}{{ $scheme = "" }}{{ end }}
+                            <a class="btn btn-light btn-sm text-muted" href="{{ ($scheme) }}{{ . }}" target="_blank" rel="noopener noreferrer" role="button">
+                              <i class="fas fa-link fa-fw"></i>
+                            </a>
+                          </li>
+                        {{ end }}
+
+                        {{ with ($org.twitter_username) }}
+                          <li title='{{ i18n "github.twitter" }}' class="list-inline-item">
+                            <a class="btn btn-light btn-sm text-muted" href="https://twitter.com/{{ . }}" target="_blank" rel="noopener noreferrer" role="button">
+                              <i class="fab fa-twitter fa-fw"></i>
+                            </a>
+                          </li>
+                        {{ end }}
+
+                        {{ with ($org.email) }}
+                          <li title='{{ i18n "github.email" }}' class="list-inline-item">
+                            <a class="btn btn-light btn-sm text-muted" href="mailto:{{ . }}" target="_blank" rel="noopener noreferrer" role="button">
+                              <i class="fas fa-envelope-open-text fa-fw"></i>
+                            </a>
+                          </li>
+                        {{ end }}
+
+                        {{ with ($org.login) }}
+                          <li title='{{ i18n "github.events" }}' class="list-inline-item">
+                            <a class="btn btn-light btn-sm text-muted" href="#" data-bs-toggle="modal" data-bs-target="#modal-github-events-{{ . }}" role="button">
+                              <i class="fas fa-bolt fa-fw"></i>
+                            </a>
+                          </li>
+                        {{ end }}
+
+                    </ul>
+                  </div>
+                </article>
+              </div>
+
+              {{ (partial "module/github/events.modal" (dict
+              "type" "orgs"
+              "id" ($org.login)
+              "title" (($org.name) | default ($org.login))
+              "token" ($token)
+              "org" ($org.login)
+              )) }}
+
+          {{ end }}
+
+      </div>
+
+    {{ end }}
+
+</article>

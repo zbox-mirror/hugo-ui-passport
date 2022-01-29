@@ -1,0 +1,36 @@
+<div class="col">
+  <div class="card h-100">
+    <h5 id="crypto" class="card-header">
+      <a href="#crypto">{{ (i18n "requisites.crypto.header") }}</a>
+    </h5>
+    <div class="card-body">
+      <div class="node-body">
+        <div class="row row-cols-1 g-3">
+
+            {{ range $key, $value := ($.Site.Data.requisites.crypto) }}
+
+              <div class="col">
+                <div class="input-group">
+                  <span class="input-group-text text-uppercase"><code>{{ ($key) }}</code></span>
+                  <input class="form-control" type="text" value="{{ (.account) }}" data-ext-fn="ext-select-all" readonly/>
+                  <button title="{{ (i18n "qrcode") }}" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal-requisites-qrcode-{{ ($key) }}">
+                    <i class="fas fa-qrcode fa-fw"></i>
+                  </button>
+                </div>
+
+                  {{ (partial "module/requisites/crypto.modal"
+                  (dict
+                  "id" ($key)
+                  "title" ($key)
+                  "content" (.account)
+                  )) }}
+
+              </div>
+
+            {{ end }}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

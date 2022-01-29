@@ -1,0 +1,277 @@
+# ----------------------------------------------------------------------------------------------------------------------
+# General
+# ----------------------------------------------------------------------------------------------------------------------
+
+[birthday]
+other = "Birthday"
+
+[categories]
+other = "Categories"
+
+[close]
+other = "Close"
+
+[egg]
+other = "Oops!"
+
+[email]
+other = "E-mail"
+
+[languages]
+other = "Languages"
+
+[name]
+other = "Name"
+
+[nickname]
+other = "Nickname"
+
+[phone]
+other = "Phone"
+
+[site_resize]
+other = "Resize site"
+
+[tags]
+other = "Tags"
+
+[location]
+other = "Location"
+
+[site]
+other = "Site"
+
+[qrcode]
+other = "QR Code"
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Expertise.
+# ----------------------------------------------------------------------------------------------------------------------
+
+[expertise.header]
+other = "Expertise"
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Experience.
+# ----------------------------------------------------------------------------------------------------------------------
+
+[experience.header]
+other = "Experience"
+
+[experience.date]
+other = "Work period"
+
+[experience.position]
+other = "Position"
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Portfolio.
+# ----------------------------------------------------------------------------------------------------------------------
+
+[portfolio.header]
+other = "Portfolio"
+
+[portfolio.date]
+other = "Date"
+
+[portfolio.url]
+other = "Site"
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Keybase.
+# ----------------------------------------------------------------------------------------------------------------------
+
+[keybase.name]
+other = "Name"
+
+[keybase.nickname]
+other = "Nickname"
+
+[keybase.location]
+other = "Location"
+
+[keybase.key_pgp]
+other = "PGP Key"
+
+[keybase.key_fingerprint]
+other = "PGP Fingerprint"
+
+[keybase.key_bits]
+other = "PGP Bits"
+
+[keybase.confirmed]
+other = "Confirmed"
+
+[keybase.not_confirmed]
+other = "Not Confirmed"
+
+# ----------------------------------------------------------------------------------------------------------------------
+# GitHub.
+# ----------------------------------------------------------------------------------------------------------------------
+
+[github.events]
+other = "Events"
+
+[github.orgs]
+other = "Organizations"
+
+[github.repos]
+other = "Repositories"
+
+[github.blog]
+other = "Site"
+
+[github.twitter]
+other = "Twitter"
+
+[github.email]
+other = "E-mail"
+
+[github.watchers]
+other = "Watchers"
+
+[github.stargazers]
+other = "Stargazers"
+
+[github.forks]
+other = "Forks"
+
+[github.license]
+other = "License"
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Vk.
+# ----------------------------------------------------------------------------------------------------------------------
+
+[vk.groups]
+other = "Groups"
+
+[vk.wall]
+other = "Wall"
+
+[vk.members]
+other = "Members"
+
+[vk.site]
+other = "Site"
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Telegram.
+# ----------------------------------------------------------------------------------------------------------------------
+
+[tg.chats]
+other = "Channels"
+
+[tg.members]
+other = "Members"
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Requisites
+# ----------------------------------------------------------------------------------------------------------------------
+
+[requisites.bank.account.header]
+other = "Bank account"
+
+[requisites.bank.account.usd.beneficiary.name]
+other = "Beneficiary"
+
+[requisites.bank.account.usd.beneficiary.account]
+other = "Beneficiary's Account"
+
+[requisites.bank.account.usd.beneficiary.bank]
+other = "Beneficiary Bank"
+
+[requisites.bank.account.usd.beneficiary.swift]
+other = "Beneficiary's Bank SWIFT"
+
+[requisites.bank.account.usd.intermediary.bank]
+other = "Intermediary"
+
+[requisites.bank.account.usd.intermediary.account]
+other = "Intermediary's Bank Account"
+
+[requisites.bank.account.usd.intermediary.swift]
+other = "Intermediary's Bank SWIFT"
+
+[requisites.bank.account.usd.target]
+other = "Payment Details"
+
+[requisites.bank.account.eur.beneficiary.name]
+other = "Beneficiary"
+
+[requisites.bank.account.eur.beneficiary.account]
+other = "Beneficiary's Account"
+
+[requisites.bank.account.eur.beneficiary.bank]
+other = "Beneficiary Bank"
+
+[requisites.bank.account.eur.beneficiary.swift]
+other = "Beneficiary's Bank SWIFT"
+
+[requisites.bank.account.eur.intermediary.bank]
+other = "Intermediary"
+
+[requisites.bank.account.eur.intermediary.account]
+other = "Intermediary's Bank Account"
+
+[requisites.bank.account.eur.intermediary.swift]
+other = "Intermediary's Bank SWIFT"
+
+[requisites.bank.account.eur.target]
+other = "Payment Details"
+
+[requisites.bank.account.rub.beneficiary.name]
+other = "Beneficiary Name"
+
+[requisites.bank.account.rub.beneficiary.account]
+other = "Beneficiary Account"
+
+[requisites.bank.account.rub.beneficiary.bank]
+other = "Beneficiary Bank"
+
+[requisites.bank.account.rub.bic]
+other = "BIC"
+
+[requisites.bank.account.rub.inn]
+other = "ITN"
+
+[requisites.bank.account.rub.kpp]
+other = "IEC"
+
+[requisites.bank.account.rub.correspondent.account]
+other = "Correspondent Account"
+
+[requisites.bank.account.rub.target]
+other = "Payment Details"
+
+[requisites.card.header]
+other = "Bank Card"
+
+[requisites.crypto.header]
+other = "Crypto"
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Alerts.
+# ----------------------------------------------------------------------------------------------------------------------
+
+[alert.github.not_found]
+other = "Information from GitHub not found. API key may not have been set, or username may not be specified."
+
+[alert.vk.not_found]
+other = "Information from VKontakte not found. API key may not have been set, or group ID may not be specified."
+
+[alert.keybase.info]
+other = "Information is synchronized with Keybase server. Information is genuine and represents verified data."
+
+[alert.telegram.not_found]
+other = "Information from Telegram not found. API key may not have been set, or channel name may not be specified."
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Browser console.
+# ----------------------------------------------------------------------------------------------------------------------
+
+[console.buy_me]
+other = "Buy me a"
+
+[console.about_me]
+other = "About me"

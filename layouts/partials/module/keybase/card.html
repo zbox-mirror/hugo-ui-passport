@@ -1,0 +1,150 @@
+{{ $user := (($.Site.Data.api.keybase.user) | default "") }}
+{{ $data := (getJSON "https://keybase.io/_/api/1.0/user/lookup.json?usernames=" ($user)) }}
+
+{{ with ($data) }}
+
+    {{ (partial "function/alert" (dict
+    "type" "success"
+    "icon" "fab fa-keybase"
+    "msg" "alert.keybase.info"
+    )) }}
+
+    {{ range (.them) }}
+
+      <div class="card">
+        <div class="row g-0">
+          <div class="col-lg-4">
+            <div class="node-cover text-center p-3">
+              <img class="img-fluid rounded" src="{{ (.pictures.primary.url) }}" alt="Photo" loading="lazy"/>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card-body h-100">
+              <div class="node-body d-flex flex-column h-100">
+                <div class="flex-shrink-0 mb-3">
+                  <div class="row row-cols-1 g-1">
+
+                      {{ with (.basics.username) }}
+                        <div class="col">
+                          <div class="row">
+                            <div class="col-4">{{ (i18n "keybase.name") }}</div>
+                            <div class="col">{{ . }}</div>
+                          </div>
+                        </div>
+                      {{ end }}
+
+                      {{ with (.profile.full_name) }}
+                        <div class="col">
+                          <div class="row">
+                            <div class="col-4">{{ (i18n "keybase.nickname") }}</div>
+                            <div class="col">{{ . }}</div>
+                          </div>
+                        </div>
+                      {{ end }}
+
+                      {{ with (.profile.location) }}
+                        <div class="col">
+                          <div class="row">
+                            <div class="col-4">{{ (i18n "keybase.location") }}</div>
+                            <div class="col">{{ . }}</div>
+                          </div>
+                        </div>
+                      {{ end }}
+
+                    <div class="col">
+                      <div class="row">
+                        <div class="col-4">{{ (i18n "keybase.key_pgp") }}</div>
+                        <div class="col">
+                          <a href="https://keybase.io/{{ ($user) }}/pgp_keys.asc" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-download fa-fw"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+                      {{ with (.public_keys.primary.key_fingerprint) }}
+                        <div class="col">
+                          <div class="row">
+                            <div class="col-4">{{ (i18n "keybase.key_fingerprint") }}</div>
+                            <div class="col text-uppercase">
+                                {{ $fingerprint := (printf "%s-%s-%s-%s-%s<br/>%s-%s-%s-%s-%s"
+                                (substr (.) 0 4)
+                                (substr (.) 4 4)
+                                (substr (.) 8 4)
+                                (substr (.) 12 4)
+                                (substr (.) 16 4)
+                                (substr (.) 20 4)
+                                (substr (.) 24 4)
+                                (substr (.) 28 4)
+                                (substr (.) 32 4)
+                                (substr (.) 36 4)
+                                ) }}
+                              <code>{{ (($fingerprint) | safeHTML) }}</code>
+                            </div>
+                          </div>
+                        </div>
+                      {{ end }}
+
+                      {{ with (.public_keys.primary.key_bits) }}
+                        <div class="col">
+                          <div class="row">
+                            <div class="col-4">{{ (i18n "keybase.key_bits") }}</div>
+                            <div class="col">
+                              <code>{{ . }}</code>
+                            </div>
+                          </div>
+                        </div>
+                      {{ end }}
+
+                      {{ range (.proofs_summary.all) }}
+
+                          {{ $icon := ("fas fa-exclamation-triangle text-danger") }}
+                          {{ $status := (i18n "keybase.not_confirmed") }}
+                          {{ if (.state) }}
+                              {{ $icon = ("fas fa-check-circle text-success") }}
+                              {{ $status = (i18n "keybase.confirmed") }}
+                          {{ end }}
+
+                          {{ $url_text := ((.proof_type) | humanize) }}
+                          {{ if (eq (.proof_type) ("dns")) }}
+                              {{ $url_text = (.nametag) }}
+                          {{ end }}
+
+                          <div class="col">
+                            <div class="row">
+                              <div class="col-4">
+                                <a href="{{ (.service_url) }}" target="_blank" rel="noopener noreferrer">
+                                    {{ ($url_text) }}
+                                </a>
+                              </div>
+                              <div class="col">
+                                <span title="{{ ($status) }}"><i class="{{ ($icon) }} fa-fw"></i></span>
+                              </div>
+                            </div>
+                          </div>
+
+                      {{ end }}
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          {{ with (.profile.bio) }}
+            <div class="row">
+              <div class="col">
+                <div class="card-body">
+                  <div class="node-body">
+                      {{ (. | markdownify) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+
+      </div>
+
+    {{ end }}
+{{ end }}

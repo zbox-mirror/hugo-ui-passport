@@ -1,0 +1,158 @@
+<div class="section py-3 py-md-5">
+  <div class="container">
+
+    <div class="card">
+      <div class="row g-0">
+        <div class="col-lg-4">
+          <div class="node-cover text-center p-3">
+            <img class="img-fluid rounded" src='https://gravatar.com/avatar/{{ (($.Site.Data.profile.photo) | md5) }}?s=512&amp;d=identicon' alt="Photo" loading="lazy"/>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card-body h-100">
+            <div class="node-body d-flex flex-column h-100">
+              <div class="flex-shrink-0 mb-3">
+                <div class="row row-cols-1 g-1">
+
+                    {{ with (index ($.Site.Data.profile.fullname) (.Lang)) }}
+                      <div class="col">
+                        <div class="row">
+                          <div class="col-4">{{ (i18n "name") }}</div>
+                          <div class="col">{{ . }}</div>
+                        </div>
+                      </div>
+                    {{ end }}
+
+                    {{ with ($.Site.Data.profile.nickname) }}
+                        {{ $nickname := . }}
+                        {{ with ($.Site.Data.profile.username) }}
+                            {{ $nickname = ((printf "<a href='https://keybase.io/%s' target='_blank' rel='noopener noreferrer'>%s</a>" (.) ($nickname)) | safeHTML) }}
+                        {{ end }}
+                        <div class="col">
+                          <div class="row">
+                            <div class="col-4">{{ (i18n "nickname") }}</div>
+                            <div class="col">{{ $nickname }}</div>
+                          </div>
+                        </div>
+                    {{ end }}
+
+                    {{ with ($.Site.Data.profile.birthday) }}
+                      <div class="col">
+                        <div class="row">
+                          <div class="col-4">{{ (i18n "birthday") }}</div>
+                          <div class="col">
+                              {{ (printf "%02d" ((time .).Month)) }} /
+                              {{ (printf "%02d" ((time .).Day)) }}
+                          </div>
+                        </div>
+                      </div>
+                    {{ end }}
+
+                    {{ with (index ($.Site.Data.profile.location) (.Lang)) }}
+                      <div class="col">
+                        <div class="row">
+                          <div class="col-4">{{ (i18n "location") }}</div>
+                          <div class="col">
+                            <a href="https://www.google.ru/maps/place/{{ . }}" target="_blank" rel="noopener noreferrer">{{ . }}</a>
+                          </div>
+                        </div>
+                      </div>
+                    {{ end }}
+
+                    {{ with ($.Site.Data.contacts.email) }}
+                      <div class="col">
+                        <div class="row">
+                          <div class="col-4">{{ (i18n "email") }}</div>
+                          <div class="col">
+                            <ul class="list-unstyled m-0">
+
+                                {{ range . }}
+                                  <li>
+                                    <a href='mailto:{{ (partial "function/email" (dict "email" .)) }}'>
+                                        {{ (partial "function/email" (dict "email" .)) }}
+                                    </a>
+                                  </li>
+                                {{ end }}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    {{ end }}
+
+                    {{ with ($.Site.Data.contacts.phone) }}
+                      <div class="col">
+                        <div class="row">
+                          <div class="col-4">{{ (i18n "phone") }}</div>
+                          <div class="col">
+                            <ul class="list-unstyled m-0">
+
+                                {{ range . }}
+                                  <li>
+                                    <a href="tel:{{ . }}">{{ (partial "function/phone" (dict "phone" .)) }}</a>
+                                  </li>
+                                {{ end }}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    {{ end }}
+
+                    {{ with ($.Site.Data.contacts.site) }}
+                      <div class="col">
+                        <div class="row">
+                          <div class="col-4">{{ (i18n "site") }}</div>
+                          <div class="col">
+                            <ul class="list-unstyled m-0">
+
+                                {{ range . }}
+                                  <li>
+                                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ . }}</a>
+                                  </li>
+                                {{ end }}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    {{ end }}
+
+                </div>
+              </div>
+              <div class="mt-auto">
+                <div class="row row-cols-auto g-1">
+
+                    {{ range ($.Site.Data.profiles) }}
+                        {{ $url := (urls.Parse .) }}
+                        {{ $name := (split $url.Host ".") }}
+                        <div class="col">
+                          <a title="{{ ((index ($name) 0) | humanize) }}" class="btn btn-light btn-social btn-lg" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-{{ (index ($name) 0) }} fa-fw"></i>
+                          </a>
+                        </div>
+                    {{ end }}
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        {{ with (index ($.Site.Data.profile.bio) (.Lang)) }}
+          <div class="row">
+            <div class="col">
+              <div class="card-body">
+                <div class="node-body">
+                    {{ (. | markdownify) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{ end }}
+
+    </div>
+
+  </div>
+</div>

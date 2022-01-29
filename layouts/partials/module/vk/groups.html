@@ -1,0 +1,95 @@
+{{ $token := ((($.Site.Data.api.vk.token) | base64Decode) | default "") }}
+{{ $version := (($.Site.Data.api.vk.version) | default "") }}
+{{ $group_id := (($.Site.Data.api.vk.group.id) | default "") }}
+{{ $group_fields := (($.Site.Data.api.vk.group.fields) | default "") }}
+{{ $lang := ((.Lang) | default "ru") }}
+{{ $groups := (getJSON "https://api.vk.com/method/groups.getById?group_ids=" ($group_id) "&fields=" ($group_fields) "&lang=" ($lang) "&access_token=" ($token) "&v=" ($version)) }}
+
+<article>
+  <h2 id="groups" class="text-center text-uppercase border-bottom pb-1 mb-3">
+    <a href="#groups">{{ (i18n "vk.groups") }}</a>
+  </h2>
+
+    {{ with ($groups.response) }}
+
+      <div class="row row-cols-1 row-cols-lg-2 g-3">
+
+          {{ range . }}
+
+              {{ $type := (.type) }}
+              {{ $id := ((.id) | int) }}
+              {{ if eq $type "group" }}{{ $type = "club" }}{{end}}
+              {{ if eq $type "page" }}{{ $type = "public" }}{{ end }}
+              {{ $url := (printf "https://vk.com/%s%d" ($type) ($id)) }}
+
+              <div class="col">
+                <article class="card h-100">
+                  <h5 class="card-header">
+                    <a href="{{ ($url) }}" target="_blank" rel="noopener noreferrer">{{ (.name) }}</a>
+                  </h5>
+                  <div class="row g-0 h-100">
+                    <div class="col-4">
+                      <div class="node-cover text-center p-3">
+                        <img src="{{ (.photo_200) }}" class="img-fluid rounded" alt="{{ ((.name) | default (.screen_name)) }}" loading="lazy"/>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="card-body">
+                        <div class="node-body">
+                            {{ ((.description) | markdownify) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-muted">
+                    <ul class="list-inline m-0">
+
+                        {{ with (.members_count) }}
+                          <li title='{{ i18n "vk.members" }}' class="list-inline-item">
+                            <a class="btn btn-light btn-sm text-muted" href="https://vk.com/search?c%5Bsection%5D=people&c%5Bgroup%5D={{ ($id) }}" target="_blank" rel="noopener noreferrer" role="button">
+                              <i class="fas fa-user fa-fw me-1"></i>
+                                {{ . }}
+                            </a>
+                          </li>
+                        {{ end }}
+
+                        {{ with (.site) }}
+                          <li title='{{ i18n "vk.site" }}' class="list-inline-item">
+                              {{ $url := (urls.Parse .) }}
+                              {{ $scheme := "http://" }}
+                              {{ if ($url.Scheme) }}{{ $scheme = "" }}{{ end }}
+                            <a class="btn btn-light btn-sm text-muted" href="{{ ($scheme) }}{{ . }}" target="_blank" rel="noopener noreferrer" role="button">
+                              <i class="fas fa-link fa-fw"></i>
+                            </a>
+                          </li>
+                        {{ end }}
+
+                        {{ with (.id) }}
+                          <li title='{{ i18n "vk.wall" }}' class="list-inline-item">
+                            <a class="btn btn-light btn-sm text-muted" href="#" data-bs-toggle="modal" data-bs-target="#modal-vk-wall-{{ . | int }}" role="button">
+                              <i class="fas fa-book fa-fw"></i>
+                            </a>
+                          </li>
+                        {{ end }}
+
+                    </ul>
+                  </div>
+                </article>
+              </div>
+
+              {{ (partial "module/vk/wall.modal" (dict
+              "id" ((.id) | int)
+              "title" (.name)
+              "token" ($token)
+              "version" ($version)
+              "owner" ((.id) | int)
+              "language" ($lang)
+              )) }}
+
+          {{ end }}
+
+      </div>
+
+    {{ end }}
+
+</article>

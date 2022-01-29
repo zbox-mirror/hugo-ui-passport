@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+  <div class="section py-3 py-md-5">
+    <div class="container">
+
+        {{ (partial "breadcrumb" .) }}
+
+        {{ if (and ($.Site.Data.api.vk.token) ($.Site.Data.api.vk.app.id)) }}
+
+            {{ (partial "module/vk/groups" .) }}
+
+        {{ else }}
+
+            {{ (partial "function/alert" (dict
+            "type" "danger"
+            "icon" "fab fa-vk"
+            "msg" "alert.vk.not_found"
+            )) }}
+
+        {{ end }}
+
+    </div>
+  </div>
+
+{{ end }}

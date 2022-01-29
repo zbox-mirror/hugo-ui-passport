@@ -1,0 +1,48 @@
+{{ $type := ((.type) | default "") }}
+{{ $id := ((.id) | default "") }}
+{{ $title := ((.title) | default "") }}
+{{ $token := ((.token) | default "") }}
+{{ $user := ((.user) | default "") }}
+{{ $repo := ((.repo) | default "") }}
+{{ $org := ((.org) | default "") }}
+{{ $events := ("") }}
+
+{{ if (eq ($type) ("orgs")) }}
+    {{ $events = (getJSON "https://api.github.com/orgs/" ($org) "/events" ($token)) }}
+{{ end }}
+
+{{ if (eq ($type) ("repos")) }}
+    {{ $events = (getJSON "https://api.github.com/repos/" ($user) "/" ($repo) "/events" ($token)) }}
+{{ end }}
+
+{{ with ($events) }}
+
+  <article class="modal fade" id="modal-github-events-{{ ($id) }}" tabindex="-1" aria-labelledby="label-github-events-{{ ($id) }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="label-github-events-{{ ($id) }}">{{ $title }} / {{ (i18n "github.events") }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label='{{ (i18n "close") }}'></button>
+        </div>
+        <div class="modal-body">
+          <div class="node-body">
+            <div class="row row-cols-1">
+              <div class="col">
+                <table class="table table-striped table-bordered align-middle">
+                  <tbody>
+
+                  {{ range (first 30 .) }}
+                      {{ (partial "module/github/events.list" .) }}
+                  {{ end }}
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+{{ end }}

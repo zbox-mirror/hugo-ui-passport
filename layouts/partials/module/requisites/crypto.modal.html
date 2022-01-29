@@ -1,0 +1,31 @@
+{{ $id := ((.id) | default "") }}
+{{ $title := ((.title) | default "") }}
+{{ $content := ((.content) | default "") }}
+
+<div class="modal fade" id="modal-requisites-qrcode-{{ ($id) }}" tabindex="-1" aria-labelledby="label-requisites-qrcode-{{ ($id) }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-uppercase" id="label-requisites-qrcode-{{ ($id) }}">{{ ($title) }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label='{{ (i18n "close") }}'></button>
+      </div>
+      <div class="modal-body">
+        <div class="node-body">
+          <div class="row row-cols-1 g-3">
+            <div class="col">
+              <div class="d-flex justify-content-center">
+                <div data-ext-fn="ext-qrcode" data-ext-text="{{ ($content) }}"></div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="input-group">
+                <span class="input-group-text text-uppercase"><code>{{ ($id) }}</code></span>
+                <input class="form-control" type="text" value="{{ ($content) }}" data-ext-fn="ext-select-all" readonly/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

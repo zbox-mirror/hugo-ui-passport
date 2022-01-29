@@ -1,0 +1,43 @@
+<!doctype html>
+
+{{ $lang := ($.Site.LanguageCode | default "en-US") }}
+{{ $type := ($.Type | default "") }}
+{{ $home := "" }}{{ $node := "" }}{{ $page := "" }}
+{{ if $.IsHome }}{{ $home = "is-home" }}{{ end }}
+{{ if $.IsNode }}{{ $node = "is-node" }}{{ end }}
+{{ if $.IsPage }}{{ $page = "is-page" }}{{ end }}
+
+<html class="h-100" dir="ltr" lang="{{ $lang }}"
+      prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile# fb: http://ogp.me/ns/fb#">
+<head>{{ (partial "head" .) }}</head>
+<body class="d-flex flex-column h-100 {{ $home }} {{ $node }} {{ $page }} type-{{ $type }}">
+<header>{{ (partial "header" .) }}</header>
+<div class="wrapper flex-shrink-0">
+    {{ if (and ($.Site.Data.cfg.sidebar.on) ($.IsHome)) }}
+      <div class="container">
+        <div class="row g-3">
+          <main class="col">
+              {{ block "main" . }}{{ end }}
+          </main>
+          <aside class="col-lg-4">
+              {{ partial "sidebar" . }}
+          </aside>
+        </div>
+      </div>
+    {{ else }}
+      <main>
+          {{ block "main" . }}{{ end }}
+      </main>
+    {{ end }}
+</div>
+<footer class="mt-auto">
+    {{ (partial "footer" .) }}
+</footer>
+
+{{ (partial "module/eggs" .) }}
+
+<!--[ ui: scripts ]-->
+{{ (partial "ui.js" .) }}
+<!--[ / ui: scripts ]-->
+</body>
+</html>

@@ -1,0 +1,46 @@
+{{ $type := (.type) }}
+{{ $icon := ("fas fa-bolt text-muted") }}
+{{ $url := (printf "%s" (.repo.name)) }}
+
+{{ if (eq ($type) ("CreateEvent")) }}
+    {{ $icon = ("far fa-plus-square text-success") }}
+{{ end }}
+
+{{ if (eq ($type) ("ForkEvent")) }}
+    {{ $icon = ("fas fa-code-branch text-muted") }}
+{{ end }}
+
+{{ if (eq ($type) ("WatchEvent")) }}
+    {{ $icon = ("fas fa-eye text-muted") }}
+{{ end }}
+
+{{ if (eq ($type) ("IssuesEvent")) }}
+    {{ $icon = ("far fa-dot-circle text-muted") }}
+    {{ $url = (.payload.issue.html_url) }}
+{{ end }}
+
+{{ if (eq ($type) ("PushEvent")) }}
+    {{ $icon = ("far fa-edit text-warning") }}
+    {{ $url = (printf "%s/commit/%s" (.repo.name) (.payload.head)) }}
+{{ end }}
+
+<tr>
+  <td class="text-center">
+    <span title="{{ (($type) | humanize) }}"><i class="{{ ($icon) }} fa-fw"></i></span>
+  </td>
+  <td class="text-start w-100">
+    <a href="https://github.com/{{ ($url) }}" target="_blank" rel="noopener noreferrer">{{ (.repo.name) }}</a>
+
+      {{ if (eq ($type) ("ForkEvent")) }}
+        <br/>&rdsh;
+        <a href="https://github.com/{{ (.payload.forkee.full_name) }}" target="_blank" rel="noopener noreferrer">{{ (.payload.forkee.full_name) }}</a>
+      {{ end }}
+
+  </td>
+  <td class="text-center text-nowrap">
+    <a href="https://github.com/{{ (.actor.login) }}" target="_blank" rel="noopener noreferrer">{{ (.actor.login) }}</a>
+  </td>
+  <td class="text-end text-nowrap">
+      {{ ((.created_at) | time.Format "2006/01/02 15:04 MST") }}
+  </td>
+</tr>

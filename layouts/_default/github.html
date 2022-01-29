@@ -1,0 +1,49 @@
+{{ define "main" }}
+
+    {{ if (and ($.Site.Data.api.github.token) ($.Site.Data.api.github.user)) }}
+
+      <div class="section py-3 py-md-5">
+        <div class="container">
+
+            {{ (partial "breadcrumb" .) }}
+
+            {{ (partial "module/github/events" .) }}
+
+        </div>
+      </div>
+
+      <div class="section py-3 py-md-5">
+        <div class="container">
+
+            {{ (partial "module/github/orgs" .) }}
+
+        </div>
+      </div>
+
+      <div class="section py-3 py-md-5">
+        <div class="container">
+
+            {{ (partial "module/github/repos" .) }}
+
+        </div>
+      </div>
+
+    {{ else }}
+
+      <div class="section py-3 py-md-5">
+        <div class="container">
+
+            {{ (partial "breadcrumb" .) }}
+
+            {{ (partial "function/alert" (dict
+            "type" "danger"
+            "icon" "fab fa-github"
+            "msg" "alert.github.not_found"
+            )) }}
+
+        </div>
+      </div>
+
+    {{ end }}
+
+{{ end }}

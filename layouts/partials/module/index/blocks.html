@@ -1,0 +1,92 @@
+{{ $x := (.context | default .) }}
+{{ $type := ((.type) | default "") }}
+{{ $posts := (where ($x.Site.RegularPages) "Type" "in" ($type)) }}
+
+{{ $cols := 2 }}
+{{ if ((len ($posts)) | eq 1) }}{{ $cols = 1 }}{{ end }}
+
+{{ with ($posts) }}
+
+  <div class="section py-3 py-md-5">
+    <div class="container">
+      <h2 id="{{ ($type) }}" class="text-center text-uppercase border-bottom pb-1 mb-3">
+        <a href="#{{ ($type) }}">{{ (i18n (printf "%s.header" ($type))) }}</a>
+      </h2>
+      <div class="row row-cols-1 row-cols-lg-{{ ($cols) }} g-3">
+
+          {{ range . }}
+
+            <div class="col">
+              <article class="card node-{{ ($type) }} h-100">
+                <h5 class="card-header">
+                  <a href="{{ (.RelPermalink) }}">{{ (.Title) }}</a>
+                </h5>
+                <div class="card-body">
+                  <div class="node-body">
+                      {{ (.Render "summary") }}
+                  </div>
+                </div>
+
+                  {{ with (.Param "info") }}
+
+                    <div class="card-footer text-muted">
+                      <ul class="list-inline m-0">
+
+                          {{ with (.experience) }}
+                              {{ if (.date.start) }}
+                                <li title='{{ i18n "experience.date" }}' class="list-inline-item">
+                                  <div class="btn btn-light btn-sm text-muted" role="button">
+                                    <i class="fas fa-user-clock fa-fw me-1"></i>
+                                      {{ ((.date.start) | time.Format "2006/01/02") }}
+                                    &mdash;
+                                      {{ if (.date.stop) }}
+                                          {{ ((.date.stop) | time.Format "2006/01/02") }}
+                                      {{ else }}
+                                        <i class="fas fa-infinity fa-fw"></i>
+                                      {{ end }}
+                                  </div>
+                                </li>
+                              {{ end }}
+                              {{ if (.position) }}
+                                <li title='{{ i18n "experience.position" }}' class="list-inline-item">
+                                  <div class="btn btn-light btn-sm text-muted" role="button">
+                                    <i class="fas fa-user-tie fa-fw me-1"></i>
+                                      {{ (.position) }}
+                                  </div>
+                                </li>
+                              {{ end }}
+                          {{ end }}
+
+                          {{ with (.portfolio) }}
+                              {{ if (.date) }}
+                                <li title='{{ i18n "portfolio.date" }}' class="list-inline-item">
+                                  <div class="btn btn-light btn-sm text-muted" role="button">
+                                    <i class="fas fa-calendar-alt fa-fw me-1"></i>
+                                      {{ ((.date) | time.Format "2006/01/02") }}
+                                  </div>
+                                </li>
+                              {{ end }}
+                              {{ if (.url) }}
+                                <li title='{{ i18n "portfolio.url" }}' class="list-inline-item">
+                                  <a class="btn btn-light btn-sm text-muted" href="{{ (.url) }}" target="_blank" rel="noopener noreferrer" role="button">
+                                    <i class="fas fa-link fa-fw"></i>
+                                  </a>
+                                </li>
+                              {{ end }}
+                          {{ end }}
+
+                      </ul>
+                    </div>
+
+                  {{ end }}
+
+              </article>
+            </div>
+
+          {{ end }}
+
+      </div>
+    </div>
+  </div>
+
+{{ end }}

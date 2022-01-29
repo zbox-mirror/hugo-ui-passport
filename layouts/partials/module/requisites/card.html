@@ -1,0 +1,30 @@
+<div class="col">
+  <div class="card h-100">
+    <h5 id="card" class="card-header">
+      <a href="#card">{{ (i18n "requisites.card.header") }}</a>
+    </h5>
+    <div class="card-body">
+      <div class="node-body">
+        <div class="row row-cols-1 g-3">
+
+            {{ range $key, $value := ($.Site.Data.requisites.card) }}
+
+                {{ $sign := "" }}
+                {{ if (eq ($key) ("usd")) }}{{ $sign = "dollar" }}{{ end }}
+                {{ if (eq ($key) ("eur")) }}{{ $sign = "euro" }}{{ end }}
+                {{ if (eq ($key) ("rub")) }}{{ $sign = "ruble" }}{{ end }}
+                <div class="col">
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-{{ ($sign) }}-sign fa-fw"></i></span>
+                    <input class="form-control" type="text" value="{{ (.number) }}" data-ext-fn="ext-select-all" readonly/>
+                    <span class="input-group-text"><i class="far fa-credit-card fa-fw"></i></span>
+                  </div>
+                </div>
+
+            {{ end }}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

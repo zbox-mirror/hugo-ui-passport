@@ -1,0 +1,47 @@
+{{ $id := ((.id) | default "") }}
+{{ $title := ((.title) | default "") }}
+{{ $token := ((.token) | default "") }}
+{{ $version := ((.version) | default "") }}
+{{ $owner := ((.owner) | default "") }}
+{{ $lang := ((.language) | default "ru") }}
+
+{{ $wall := (getJSON "https://api.vk.com/method/wall.get?owner_id=-" ($owner) "&lang=" ($lang) "&access_token=" ($token) "&v=" ($version)) }}
+
+{{ with ($wall) }}
+
+  <article class="modal fade" id="modal-vk-wall-{{ ($id) }}" tabindex="-1" aria-labelledby="label-vk-wall-{{ ($id) }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="label-vk-wall-{{ ($id) }}">{{ $title }} / {{ (i18n "vk.wall") }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label='{{ (i18n "close") }}'></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group list-group-flush">
+
+              {{ range (first 10 (.response.items)) }}
+
+                <li class="list-group-item">
+                  <article>
+                    <header>
+                      <h4 class="text-center">
+                        <a href="https://vk.com/wall-{{ ($owner) }}_{{ (.id) }}" target="_blank" rel="noopener noreferrer">
+                            {{ (((.date) | int) | time.Format "2006/01/02 15:04:05 MST") }}
+                        </a>
+                      </h4>
+                    </header>
+                    <div class="node-body">
+                        {{ ((.text) | markdownify) }}
+                    </div>
+                  </article>
+                </li>
+
+              {{ end }}
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+{{ end }}

@@ -1,0 +1,51 @@
+{{ $token := ((($.Site.Data.api.telegram.token) | base64Decode) | default "") }}
+{{ $updates := (getJSON "https://api.telegram.org/bot" ($token) "/getUpdates?offset=" ($.Site.Data.api.telegram.offset)) }}
+{{ $channel := ($.Site.Data.api.telegram.chat.user) }}
+{{/* $channel := (split ($.Site.Data.api.telegram.chat.user) ",") */}}
+
+{{ with ($updates.result) }}
+
+  <div class="row" data-masonry='{"percentPosition": true }'>
+
+      {{ range . }}
+
+          {{ if (in (.channel_post.chat.username) ($channel)) }}
+              {{ if (.channel_post.text) }}
+                <div class="col-sm-6 col-lg-4 mb-4">
+                  <div id="tg-msg{{ ((.channel_post.chat.id) | int) }}_{{ ((.channel_post.date) | int) }}" class="card">
+                    <h5 class="card-header">
+                      <a href="https://t.me/{{ (.channel_post.chat.username) }}/{{ (.channel_post.message_id) }}">
+                          {{ (.channel_post.chat.title) }}
+                      </a>
+                    </h5>
+                    <div class="card-body">
+                      <div class="node-body">
+                          {{ ((.channel_post.text) | markdownify) }}
+                      </div>
+                    </div>
+                    <div class="card-footer text-muted small">
+                      <div class="row row-cols-1 row-cols-xl-2">
+                        <div class="col text-xl-start">
+                          <a class="btn btn-light btn-sm text-muted" href="#tg-msg{{ ((.channel_post.chat.id) | int) }}_{{ ((.channel_post.date) | int) }}" role="button">
+                            <i class="fas fa-calendar-alt fa-fw me-1"></i>
+                              {{ (((.channel_post.date) | int) | time.Format "2006/01/02") }}
+                          </a>
+                        </div>
+                        <div class="col text-xl-end">
+                          <a class="btn btn-light btn-sm text-muted" href="#tg-msg{{ ((.channel_post.chat.id) | int) }}_{{ ((.channel_post.date) | int) }}" role="button">
+                            <i class="fas fa-clock fa-fw me-1"></i>
+                              {{ (((.channel_post.date) | int) | time.Format "15:04:05 MST") }}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {{ end }}
+          {{ end }}
+
+      {{ end }}
+
+  </div>
+
+{{ end }}

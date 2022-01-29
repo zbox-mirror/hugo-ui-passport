@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+  <div class="section py-3 py-md-5">
+    <div class="container">
+
+        {{ (partial "breadcrumb" .) }}
+
+      <div class="row row-cols-1 g-3">
+        <div class="col">
+          <div class="row row-cols-1 row-cols-lg-2 g-3">
+
+              {{ (partial "module/requisites/bank" .) }}
+
+              {{ (partial "module/requisites/card" .) }}
+
+              {{ (partial "module/requisites/crypto" .) }}
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+{{ end }}

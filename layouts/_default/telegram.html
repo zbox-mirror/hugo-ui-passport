@@ -1,0 +1,27 @@
+{{ define "main" }}
+
+  <div class="section py-3 py-md-5">
+    <div class="container">
+
+        {{ if (and ($.Site.Data.api.telegram.token) ($.Site.Data.api.telegram.chat.name)) }}
+
+            {{ (partial "breadcrumb" .) }}
+
+            {{ (partial "module/telegram/channels" .) }}
+
+        {{ else }}
+
+            {{ (partial "breadcrumb" .) }}
+
+            {{ (partial "function/alert" (dict
+            "type" "danger"
+            "icon" "fab fa-telegram-plane"
+            "msg" "alert.telegram.not_found"
+            )) }}
+
+        {{ end }}
+
+    </div>
+  </div>
+
+{{ end }}
