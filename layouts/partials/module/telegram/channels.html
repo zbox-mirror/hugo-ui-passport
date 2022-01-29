@@ -1,3 +1,4 @@
+{{ $user_agent := (dict "User-Agent" (($.Site.Params.user_agent) | default "")) }}
 {{ $token := ((($.Site.Data.api.telegram.token) | base64Decode) | default "") }}
 {{ $chat := (split ($.Site.Data.api.telegram.chat.name) ",") }}
 
@@ -5,8 +6,8 @@
 {{ ($data.Add "tg_chat_info" slice) }}
 
 {{ range $chat }}
-    {{ $info := (getJSON "https://api.telegram.org/bot" ($token) "/getChat?chat_id=@" .) }}
-    {{ $members_count := (getJSON "https://api.telegram.org/bot" ($token) "/getChatMemberCount?chat_id=@" .) }}
+    {{ $info := (getJSON "https://api.telegram.org/bot" ($token) "/getChat?chat_id=@" . ($user_agent)) }}
+    {{ $members_count := (getJSON "https://api.telegram.org/bot" ($token) "/getChatMemberCount?chat_id=@" . ($user_agent)) }}
 
     {{ ($data.Add "tg_chat_info" (dict
     "id" (($info.result.id) | int)

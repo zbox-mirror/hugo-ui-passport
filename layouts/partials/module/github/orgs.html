@@ -1,6 +1,7 @@
+{{ $user_agent := (dict "User-Agent" (($.Site.Params.user_agent) | default "")) }}
 {{ $token := ((dict "Authorization" (printf "token %s" (($.Site.Data.api.github.token) | base64Decode))) | default "") }}
 {{ $user := (($.Site.Data.api.github.user) | default "") }}
-{{ $orgs := (getJSON "https://api.github.com/users/" ($user) "/orgs" ($token)) }}
+{{ $orgs := (getJSON "https://api.github.com/users/" ($user) "/orgs" ($token) ($user_agent)) }}
 
 <article>
   <h2 id="orgs" class="text-center text-uppercase border-bottom pb-1 mb-3">
@@ -92,6 +93,7 @@
               "title" (($org.name) | default ($org.login))
               "token" ($token)
               "org" ($org.login)
+              "user_agent" ($user_agent)
               )) }}
 
           {{ end }}

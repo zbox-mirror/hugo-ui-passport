@@ -1,5 +1,6 @@
+{{ $user_agent := (dict "User-Agent" (($.Site.Params.user_agent) | default "")) }}
 {{ $user := (($.Site.Data.api.keybase.user) | default "") }}
-{{ $data := (getJSON "https://keybase.io/_/api/1.0/user/lookup.json?usernames=" ($user)) }}
+{{ $data := (getJSON "https://keybase.io/_/api/1.0/user/lookup.json?usernames=" ($user) ($user_agent)) }}
 
 {{ with ($data) }}
 

@@ -6,13 +6,14 @@
 {{ $repo := ((.repo) | default "") }}
 {{ $org := ((.org) | default "") }}
 {{ $events := ("") }}
+{{ $user_agent := (dict "User-Agent" ((.user_agent) | default "")) }}
 
 {{ if (eq ($type) ("orgs")) }}
-    {{ $events = (getJSON "https://api.github.com/orgs/" ($org) "/events" ($token)) }}
+    {{ $events = (getJSON "https://api.github.com/orgs/" ($org) "/events" ($token) ($user_agent)) }}
 {{ end }}
 
 {{ if (eq ($type) ("repos")) }}
-    {{ $events = (getJSON "https://api.github.com/repos/" ($user) "/" ($repo) "/events" ($token)) }}
+    {{ $events = (getJSON "https://api.github.com/repos/" ($user) "/" ($repo) "/events" ($token) ($user_agent)) }}
 {{ end }}
 
 {{ with ($events) }}
