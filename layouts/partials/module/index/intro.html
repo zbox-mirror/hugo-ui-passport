@@ -59,6 +59,28 @@
                       </div>
                     {{ end }}
 
+                    {{ with (index ($.Site.Data.profile.organization) (.Lang)) }}
+                      <div class="col">
+                        <div class="row">
+                          <div class="col-4">{{ (i18n "organization") }}</div>
+                          <div class="col">
+                            <ul class="list-unstyled m-0">
+
+                                {{ range . }}
+                                    {{ $url := (urls.Parse .url) }}
+                                    {{ $scheme := "http://" }}
+                                    {{ if ($url.Scheme) }}{{ $scheme = "" }}{{ end }}
+                                    <li>
+                                      <a href="{{ ($scheme) }}{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+                                    </li>
+                                {{ end }}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    {{ end }}
+
                     {{ with ($.Site.Data.contacts.email) }}
                       <div class="col">
                         <div class="row">
