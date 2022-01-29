@@ -107,9 +107,12 @@
                             <ul class="list-unstyled m-0">
 
                                 {{ range . }}
-                                  <li>
-                                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ . }}</a>
-                                  </li>
+                                    {{ $url := (urls.Parse .) }}
+                                    {{ $scheme := "http://" }}
+                                    {{ if ($url.Scheme) }}{{ $scheme = "" }}{{ end }}
+                                    <li>
+                                      <a href="{{ ($scheme) }}{{ . }}" target="_blank" rel="noopener noreferrer">{{ . }}</a>
+                                    </li>
                                 {{ end }}
 
                             </ul>
