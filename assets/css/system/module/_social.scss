@@ -1,184 +1,196 @@
 $sites: (
-    addtofavorites: (
-        color: #f9a600
-    ),
-    behance: (
-        color: #1769ff
-    ),
-    bitbucket: (
-        color: #205081
-    ),
-    blogger: (
-        color: #ff6501
-    ),
-    codepen: (
-        color: #000
-    ),
-    comments: (
-        color: #333
-    ),
-    delicious: (
-        color: #3274d1
-    ),
-    deviantart: (
-        color: #475c4d
-    ),
-    digg: (
-        color: #000
-    ),
-    discord: (
-        color: #7289da
-    ),
-    dribbble: (
-        color: #ea4c89
-    ),
-    email: (
-        color: #000
-    ),
-    etsy: (
-        color: #f1641e
-    ),
-    facebook: (
-        color: #1977f3
-    ),
-    fbmessenger: (
-        color: #2998ff
-    ),
-    flickr: (
-        color: #1c9be9
-    ),
-    github: (
-        color: #333
-    ),
-    gitlab: (
-        color: #f96424
-    ),
-    google: (
-        color: #3a7cec
-    ),
-    googleplus: (
-        color: #db483b
-    ),
-    hackernews: (
-        color: #ff6500
-    ),
-    houzz: (
-        color: #4dbc15
-    ),
-    instagram: (
-        color: #e23367
-    ),
-    line: (
-        color: #00c300
-    ),
-    linkedin: (
-        color: #0274b3
-    ),
-    medium: (
-        color: #02b875
-    ),
-    mix: (
-        color: #ff8226
-    ),
-    odnoklassniki: (
-        color: #f2720c
-    ),
-    patreon: (
-        color: #e85b46
-    ),
-    paypal: (
-        color: #0070ba
-    ),
-    pdf: (
-        color: #e61b2e
-    ),
-    phone: (
-        color: #1a73e8
-    ),
-    pinterest: (
-        color: #cb2027
-    ),
-    pocket: (
-        color: #ef4056
-    ),
-    print: (
-        color: #6d9f00
-    ),
-    reddit: (
-        color: #ff5600
-    ),
-    renren: (
-        color: #005eac
-    ),
-    rss: (
-        color: #ff7b0a
-    ),
-    shortlink: (
-        color: #333
-    ),
-    skype: (
-        color: #00aff0
-    ),
-    sms: (
-        color: #35d54f
-    ),
-    snapchat: (
-        color: #fffc00
-    ),
-    soundcloud: (
-        color: #f50
-    ),
-    stackoverflow: (
-        color: #f48024
-    ),
-    stumbleupon: (
-        color: #eb4823
-    ),
-    quora: (
-        color: #b92b27
-    ),
-    telegram: (
-        color: #179cde
-    ),
-    tiktok: (
-        color: #010101
-    ),
-    tumblr: (
-        color: #314358
-    ),
-    twitch: (
-        color: #4b367c
-    ),
-    twitter: (
-        color: #1da1f2
-    ),
-    viber: (
-        color: #574e92
-    ),
-    vimeo: (
-        color: #00adef
-    ),
-    vk: (
-        color: #4c75a3
-    ),
-    wechat: (
-        color: #7bb32e
-    ),
-    weibo: (
-        color: #e6162d
-    ),
-    whatsapp: (
-        color: #60b82d
-    ),
-    xing: (
-        color: #006567
-    ),
-    yahoomail: (
-        color: #4a00a1
-    ),
-    youtube: (
-        color: #ff0000
-    )
+  'addtofavorites': (
+    color: #f9a600
+  ),
+  'behance': (
+    color: #1769ff
+  ),
+  'bitbucket': (
+    color: #205081
+  ),
+  'blogger': (
+    color: #ff6501
+  ),
+  'codepen': (
+    color: #000
+  ),
+  'comments': (
+    color: #333
+  ),
+  'delicious': (
+    color: #3274d1
+  ),
+  'deviantart': (
+    color: #475c4d
+  ),
+  'digg': (
+    color: #000
+  ),
+  'discord': (
+    color: #7289da
+  ),
+  'dribbble': (
+    color: #ea4c89
+  ),
+  'email': (
+    color: #000
+  ),
+  'etsy': (
+    color: #f1641e
+  ),
+  'facebook': (
+    color: #1977f3
+  ),
+  'fbmessenger': (
+    color: #2998ff
+  ),
+  'flickr': (
+    color: #1c9be9
+  ),
+  'github': (
+    color: #333
+  ),
+  'gitlab': (
+    color: #f96424
+  ),
+  'google': (
+    color: #3a7cec
+  ),
+  'googleplus': (
+    color: #db483b
+  ),
+  'hackernews': (
+    color: #ff6500
+  ),
+  'news.ycombinator': (
+    color: #ff6500
+  ),
+  'houzz': (
+    color: #4dbc15
+  ),
+  'instagram': (
+    color: #e23367
+  ),
+  'line': (
+    color: #00c300
+  ),
+  'linkedin': (
+    color: #0274b3
+  ),
+  'livejournal': (
+    color: #004359
+  ),
+  'medium': (
+    color: #02b875
+  ),
+  'mix': (
+    color: #ff8226
+  ),
+  'odnoklassniki': (
+    color: #f2720c
+  ),
+  'ok.ru': (
+    color: #f2720c
+  ),
+  'patreon': (
+    color: #e85b46
+  ),
+  'paypal': (
+    color: #0070ba
+  ),
+  'pdf': (
+    color: #e61b2e
+  ),
+  'phone': (
+    color: #1a73e8
+  ),
+  'pinterest': (
+    color: #cb2027
+  ),
+  'pocket': (
+    color: #ef4056
+  ),
+  'print': (
+    color: #6d9f00
+  ),
+  'reddit': (
+    color: #ff5600
+  ),
+  'renren': (
+    color: #005eac
+  ),
+  'rss': (
+    color: #ff7b0a
+  ),
+  'shortlink': (
+    color: #333
+  ),
+  'skype': (
+    color: #00aff0
+  ),
+  'sms': (
+    color: #35d54f
+  ),
+  'snapchat': (
+    color: #fffc00
+  ),
+  'soundcloud': (
+    color: #f50
+  ),
+  'stackoverflow': (
+    color: #f48024
+  ),
+  'stumbleupon': (
+    color: #eb4823
+  ),
+  'quora': (
+    color: #b92b27
+  ),
+  'telegram': (
+    color: #179cde
+  ),
+  't.me': (
+    color: #179cde
+  ),
+  'tiktok': (
+    color: #010101
+  ),
+  'tumblr': (
+    color: #314358
+  ),
+  'twitch': (
+    color: #4b367c
+  ),
+  'twitter': (
+    color: #1da1f2
+  ),
+  'viber': (
+    color: #574e92
+  ),
+  'vimeo': (
+    color: #00adef
+  ),
+  'vk': (
+    color: #4c75a3
+  ),
+  'wechat': (
+    color: #7bb32e
+  ),
+  'weibo': (
+    color: #e6162d
+  ),
+  'whatsapp': (
+    color: #60b82d
+  ),
+  'xing': (
+    color: #006567
+  ),
+  'yahoomail': (
+    color: #4a00a1
+  ),
+  'youtube': (
+    color: #ff0000
+  )
 );
 
 a {
