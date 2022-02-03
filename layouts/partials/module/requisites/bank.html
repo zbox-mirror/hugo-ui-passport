@@ -1,140 +1,142 @@
-{{ range $key, $value := ($.Site.Data.requisites.bank) }}
+{{ with ($.Site.Data.requisites.bank) }}
+    {{ range $key, $value := . }}
 
-  <div class="col">
-    <div class="card h-100">
-      <h5 id="bank-{{ ($key) }}" class="card-header">
-        <a href="#bank-{{ ($key) }}">{{ i18n "requisites.bank.account.header" }} /
-          <span class="text-uppercase">{{ ($key) }}</span>
-        </a>
-      </h5>
-      <div class="card-body">
-        <div class="node-body">
-          <div class="row row-cols-1 row-cols-lg-2 g-3 align-items-center">
+      <div class="col">
+        <div class="card h-100">
+          <h5 id="bank-{{ ($key) }}" class="card-header">
+            <a href="#bank-{{ ($key) }}">{{ i18n "requisites.bank.account.header" }} /
+              <span class="text-uppercase">{{ ($key) }}</span>
+            </a>
+          </h5>
+          <div class="card-body">
+            <div class="node-body">
+              <div class="row row-cols-1 row-cols-lg-2 g-3 align-items-center">
 
-              {{ with (.beneficiary.name) }}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.beneficiary.name" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-user fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.beneficiary.name) }}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.beneficiary.name" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-user fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
-              {{ with (.beneficiary.account) }}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.beneficiary.account" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-wallet fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.beneficiary.account) }}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.beneficiary.account" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-wallet fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
-              {{ with (.beneficiary.bank) }}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.beneficiary.bank" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-university fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.beneficiary.bank) }}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.beneficiary.bank" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-university fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
-              {{ with (.beneficiary.swift) }}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.beneficiary.swift" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-hashtag fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.beneficiary.swift) }}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.beneficiary.swift" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-hashtag fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
-              {{ with (.intermediary.bank) }}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.intermediary.bank" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-university fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.intermediary.bank) }}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.intermediary.bank" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-university fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
-              {{ with (.intermediary.account) }}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.intermediary.account" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-wallet fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.intermediary.account) }}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.intermediary.account" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-wallet fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
-              {{ with (.intermediary.swift) }}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.intermediary.swift" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-hashtag fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.intermediary.swift) }}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.intermediary.swift" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-hashtag fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
-              {{ with (.bic) }}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.bic" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-hashtag fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.bic) }}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.bic" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-hashtag fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
-              {{ with (.inn) }}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.inn" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-hashtag fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.inn) }}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.inn" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-hashtag fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
-              {{ with (.kpp) }}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.kpp" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-hashtag fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.kpp) }}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.kpp" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-hashtag fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
-              {{ with (.correspondent.account) }}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.correspondent.account" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-wallet fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.correspondent.account) }}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.correspondent.account" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-wallet fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
-              {{ with (.target)}}
-                <div class="col">{{ (i18n (printf "requisites.bank.account.%s.target" ($key))) }}</div>
-                <div class="col">
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-paper-plane fa-fw"></i></span>
-                    <input class="form-control" type="text" value="{{ . }}" readonly/>
-                  </div>
-                </div>
-              {{ end }}
+                  {{ with (.target)}}
+                    <div class="col">{{ (i18n (printf "requisites.bank.account.%s.target" ($key))) }}</div>
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-paper-plane fa-fw"></i></span>
+                        <input class="form-control" type="text" value="{{ . }}" readonly/>
+                      </div>
+                    </div>
+                  {{ end }}
 
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
+    {{ end }}
 {{ end }}

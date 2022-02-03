@@ -6,13 +6,14 @@
 {{ $org := ((.org) | default "") }}
 {{ $events := ("") }}
 {{ $headers := ((.headers) | default "") }}
+{{ $ts := (now.Unix) }}
 
 {{ if (eq ($type) ("orgs")) }}
-    {{ $events = (getJSON "https://api.github.com/orgs/" ($org) "/events" ($headers)) }}
+    {{ $events = (getJSON "https://api.github.com/orgs/" ($org) "/events?ts=" ($ts) ($headers)) }}
 {{ end }}
 
 {{ if (eq ($type) ("repos")) }}
-    {{ $events = (getJSON "https://api.github.com/repos/" ($user) "/" ($repo) "/events" ($headers)) }}
+    {{ $events = (getJSON "https://api.github.com/repos/" ($user) "/" ($repo) "/events?ts=" ($ts) ($headers)) }}
 {{ end }}
 
 {{ with ($events) }}

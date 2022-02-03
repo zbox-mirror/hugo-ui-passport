@@ -1,5 +1,6 @@
 {{ $token := ((($.Site.Data.api.telegram.token) | base64Decode) | default "") }}
 {{ $chat := (split ($.Site.Data.api.telegram.chat.name) ",") }}
+{{ $ts := (now.Unix) }}
 {{ $headers := (dict
 "User-Agent" (($.Site.Params.user_agent) | default "")
 ) }}
@@ -7,26 +8,28 @@
 {{ $data := (newScratch) }}
 {{ ($data.Add "tg_chat_info" slice) }}
 
-{{ range $chat }}
-    {{ $info := (getJSON "https://api.telegram.org/bot" ($token) "/getChat?chat_id=@" . ($headers)) }}
-    {{ $members_count := (getJSON "https://api.telegram.org/bot" ($token) "/getChatMemberCount?chat_id=@" . ($headers)) }}
+{{ with $chat }}
+    {{ range . }}
+        {{ $info := (getJSON "https://api.telegram.org/bot" ($token) "/getChat?chat_id=@" . "&ts=" ($ts) ($headers)) }}
+        {{ $members_count := (getJSON "https://api.telegram.org/bot" ($token) "/getChatMemberCount?chat_id=@" . "&ts=" ($ts) ($headers)) }}
 
-    {{ ($data.Add "tg_chat_info" (dict
-    "id" (($info.result.id) | int)
-    "title" ($info.result.title)
-    "username" ($info.result.username)
-    "type" ($info.result.type)
-    "invite_link" ($info.result.invite_link)
-    "description" ($info.result.description)
-    "linked_chat_id" (($info.result.linked_chat_id) | int)
-    "members_count" ($members_count.result)
-    "photo" (dict
-    "small_file_id" ($info.result.photo.small_file_id)
-    "small_file_unique_id" ($info.result.photo.small_file_unique_id)
-    "big_file_id" ($info.result.photo.big_file_id)
-    "big_file_unique_id" ($info.result.photo.big_file_unique_id)
-    )
-    )) }}
+        {{ ($data.Add "tg_chat_info" (dict
+        "id" (($info.result.id) | int)
+        "title" ($info.result.title)
+        "username" ($info.result.username)
+        "type" ($info.result.type)
+        "invite_link" ($info.result.invite_link)
+        "description" ($info.result.description)
+        "linked_chat_id" (($info.result.linked_chat_id) | int)
+        "members_count" ($members_count.result)
+        "photo" (dict
+        "small_file_id" ($info.result.photo.small_file_id)
+        "small_file_unique_id" ($info.result.photo.small_file_unique_id)
+        "big_file_id" ($info.result.photo.big_file_id)
+        "big_file_unique_id" ($info.result.photo.big_file_unique_id)
+        )
+        )) }}
+    {{ end }}
 {{ end }}
 
 <article>
@@ -45,9 +48,7 @@
               <div class="col">
                 <article class="card h-100">
                   <h5 class="card-header clearfix">
-                    <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">
-                        {{ (.title) }}
-                    </a>
+                    <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ (.title) }}</a>
                     <span class="badge bg-secondary float-end">{{ (.type) }}</span>
                   </h5>
                   <div class="row g-0 h-100">

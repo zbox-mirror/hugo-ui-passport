@@ -1,10 +1,11 @@
 {{ $user := (($.Site.Data.api.github.user) | default "") }}
+{{ $ts := (now.Unix) }}
 {{ $headers := (dict
 "User-Agent" (($.Site.Params.user_agent) | default "")
 "Authorization" (printf "token %s" (($.Site.Data.api.github.token) | base64Decode))
 ) }}
 
-{{ $repos := (getJSON "https://api.github.com/users/" ($user) "/repos" ($headers)) }}
+{{ $repos := (getJSON "https://api.github.com/users/" ($user) "/repos?ts=" ($ts) ($headers)) }}
 
 <article>
   <h2 id="repos" class="text-center text-uppercase border-bottom pb-1 mb-3">

@@ -1,11 +1,12 @@
 {{ $user := (($.Site.Data.api.github.user) | default "") }}
+{{ $ts := (now.Unix) }}
 {{ $headers := (dict
 "User-Agent" (($.Site.Params.user_agent) | default "")
 "Authorization" (printf "token %s" (($.Site.Data.api.github.token) | base64Decode))
 ) }}
 
 
-{{ $orgs := (getJSON "https://api.github.com/users/" ($user) "/orgs" ($headers)) }}
+{{ $orgs := (getJSON "https://api.github.com/users/" ($user) "/orgs?ts=" ($ts) ($headers)) }}
 
 <article>
   <h2 id="orgs" class="text-center text-uppercase border-bottom pb-1 mb-3">
@@ -18,7 +19,7 @@
 
           {{ range . }}
 
-              {{ $org := (getJSON "https://api.github.com/orgs/" (.login) ($headers)) }}
+              {{ $org := (getJSON "https://api.github.com/orgs/" (.login) "?ts=" ($ts) ($headers)) }}
               <div class="col">
                 <article class="card h-100">
                   <h5 class="card-header">

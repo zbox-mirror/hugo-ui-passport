@@ -1,5 +1,5 @@
 {{ define "breadcrumb" }}
-    {{ with .Parent }}
+    {{ with (.Parent) }}
         {{ template "breadcrumb" . }}
         {{ $home_icon := (("<i class='fas fa-home fa-fw'></i>") | safeHTML) }}
         <li class="breadcrumb-item">
@@ -9,7 +9,7 @@
 {{ end }}
 
 {{ if ($.Site.Data.cfg.breadcrumb.on) }}
-    {{ if (not .IsHome) }}
+    {{ if (not (.IsHome)) }}
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-light p-2 small rounded">
             {{ template "breadcrumb" . }}

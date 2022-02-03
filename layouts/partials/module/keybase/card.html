@@ -1,9 +1,10 @@
 {{ $user := (($.Site.Data.api.keybase.user) | default "") }}
+{{ $ts := (now.Unix) }}
 {{ $headers := (dict
 "User-Agent" (($.Site.Params.user_agent) | default "")
 ) }}
 
-{{ $data := (getJSON "https://keybase.io/_/api/1.0/user/lookup.json?usernames=" ($user) ($headers)) }}
+{{ $data := (getJSON "https://keybase.io/_/api/1.0/user/lookup.json?usernames=" ($user) "&ts=" ($ts) ($headers)) }}
 
 {{ with ($data) }}
 

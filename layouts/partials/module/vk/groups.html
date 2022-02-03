@@ -3,11 +3,12 @@
 {{ $group_id := (($.Site.Data.api.vk.group.id) | default "") }}
 {{ $group_fields := (($.Site.Data.api.vk.group.fields) | default "") }}
 {{ $lang := ((.Lang) | default "ru") }}
+{{ $ts := (now.Unix) }}
 {{ $headers := (dict
 "User-Agent" (($.Site.Params.user_agent) | default "")
 ) }}
 
-{{ $groups := (getJSON "https://api.vk.com/method/groups.getById?group_ids=" ($group_id) "&fields=" ($group_fields) "&lang=" ($lang) "&access_token=" ($token) "&v=" ($version) ($headers)) }}
+{{ $groups := (getJSON "https://api.vk.com/method/groups.getById?group_ids=" ($group_id) "&fields=" ($group_fields) "&lang=" ($lang) "&access_token=" ($token) "&v=" ($version) "&ts=" ($ts) ($headers)) }}
 
 <article>
   <h2 id="groups" class="text-center text-uppercase border-bottom pb-1 mb-3">
@@ -22,14 +23,15 @@
 
               {{ $type := (.type) }}
               {{ $id := ((.id) | int) }}
-              {{ if eq $type "group" }}{{ $type = "club" }}{{end}}
-              {{ if eq $type "page" }}{{ $type = "public" }}{{ end }}
+              {{ if (eq ($type) ("group")) }}{{ $type = "club" }}{{end}}
+              {{ if (eq ($type) ("page")) }}{{ $type = "public" }}{{ end }}
               {{ $url := (printf "https://vk.com/%s%d" ($type) ($id)) }}
 
               <div class="col">
                 <article class="card h-100">
                   <h5 class="card-header">
                     <a href="{{ ($url) }}" target="_blank" rel="noopener noreferrer">{{ (.name) }}</a>
+                    <span class="badge bg-secondary float-end">{{ (.type) }}</span>
                   </h5>
                   <div class="row g-0 h-100">
                     <div class="col-4">

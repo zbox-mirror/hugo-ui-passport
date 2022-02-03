@@ -1,5 +1,5 @@
 <!--[ blocks ]-->
-{{ $block := (where $.Site.RegularPages "Type" "in" "footer") }}
+{{ $block := (where ($.Site.RegularPages) "Type" "in" "footer") }}
 
 {{ with ($block) }}
 

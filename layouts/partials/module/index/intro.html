@@ -1,3 +1,5 @@
+{{ $ts := (now.Unix) }}
+
 <div class="section py-3 py-md-4">
   <div class="container">
 
@@ -5,7 +7,9 @@
       <div class="row g-0">
         <div class="col-lg-4">
           <div class="node-cover text-center p-3">
-            <img class="img-fluid rounded" src='https://gravatar.com/avatar/{{ (($.Site.Data.profile.photo) | md5) }}?s=512&amp;d=identicon' alt="Photo" loading="lazy"/>
+            <img class="img-fluid rounded"
+                 src='https://gravatar.com/avatar/{{ (($.Site.Data.profile.photo) | md5) }}?s=512&amp;d=identicon&amp;ts={{ ($ts) }}'
+                 alt="Photo" loading="lazy"/>
           </div>
         </div>
         <div class="col-lg-8">
@@ -31,7 +35,7 @@
                         <div class="col">
                           <div class="row">
                             <div class="col-4">{{ (i18n "nickname") }}</div>
-                            <div class="col">{{ $nickname }}</div>
+                            <div class="col">{{ ($nickname) }}</div>
                           </div>
                         </div>
                     {{ end }}
@@ -65,16 +69,14 @@
                           <div class="col-4">{{ (i18n "organization") }}</div>
                           <div class="col">
                             <ul class="list-unstyled m-0">
-
                                 {{ range . }}
                                     {{ $url := (urls.Parse .url) }}
                                     {{ $scheme := "http://" }}
                                     {{ if ($url.Scheme) }}{{ $scheme = "" }}{{ end }}
                                     <li>
-                                      <a href="{{ ($scheme) }}{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+                                      <a href="{{ ($scheme) }}{{ (.url) }}" target="_blank" rel="noopener noreferrer">{{ (.name) }}</a>
                                     </li>
                                 {{ end }}
-
                             </ul>
                           </div>
                         </div>
@@ -87,7 +89,6 @@
                           <div class="col-4">{{ (i18n "email") }}</div>
                           <div class="col">
                             <ul class="list-unstyled m-0">
-
                                 {{ range . }}
                                   <li>
                                     <a href='mailto:{{ (partial "function/email" (dict "email" .)) }}'>
@@ -95,7 +96,6 @@
                                     </a>
                                   </li>
                                 {{ end }}
-
                             </ul>
                           </div>
                         </div>
@@ -108,13 +108,11 @@
                           <div class="col-4">{{ (i18n "phone") }}</div>
                           <div class="col">
                             <ul class="list-unstyled m-0">
-
                                 {{ range . }}
                                   <li>
                                     <a href="tel:{{ . }}">{{ (partial "function/phone" (dict "phone" .)) }}</a>
                                   </li>
                                 {{ end }}
-
                             </ul>
                           </div>
                         </div>
@@ -127,7 +125,6 @@
                           <div class="col-4">{{ (i18n "site") }}</div>
                           <div class="col">
                             <ul class="list-unstyled m-0">
-
                                 {{ range . }}
                                     {{ $url := (urls.Parse .) }}
                                     {{ $scheme := "http://" }}
@@ -136,7 +133,6 @@
                                       <a href="{{ ($scheme) }}{{ . }}" target="_blank" rel="noopener noreferrer">{{ . }}</a>
                                     </li>
                                 {{ end }}
-
                             </ul>
                           </div>
                         </div>

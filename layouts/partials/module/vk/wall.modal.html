@@ -5,8 +5,9 @@
 {{ $owner := ((.owner) | default "") }}
 {{ $lang := ((.language) | default "ru") }}
 {{ $headers := ((.headers) | default "") }}
+{{ $ts := (now.Unix) }}
 
-{{ $wall := (getJSON "https://api.vk.com/method/wall.get?owner_id=-" ($owner) "&lang=" ($lang) "&access_token=" ($token) "&v=" ($version) ($headers)) }}
+{{ $wall := (getJSON "https://api.vk.com/method/wall.get?owner_id=-" ($owner) "&lang=" ($lang) "&access_token=" ($token) "&v=" ($version) "&ts=" ($ts) ($headers)) }}
 
 {{ with ($wall) }}
 
