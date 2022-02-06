@@ -1,195 +1,206 @@
 $sites: (
   'addtofavorites': (
-    color: #f9a600
+    background: #f9a600
   ),
   'behance': (
-    color: #1769ff
+    background: #1769ff
   ),
   'bitbucket': (
-    color: #205081
+    background: #205081
   ),
   'blogger': (
-    color: #ff6501
+    background: #ff6501
+  ),
+  'buymeacoffee': (
+    background: #ffdd00,
+    color: #222222
   ),
   'codepen': (
-    color: #000
+    background: #000
   ),
   'comments': (
-    color: #333
+    background: #333
   ),
   'delicious': (
-    color: #3274d1
+    background: #3274d1
   ),
   'deviantart': (
-    color: #475c4d
+    background: #475c4d
   ),
   'digg': (
-    color: #000
+    background: #000
   ),
   'discord': (
-    color: #7289da
+    background: #7289da
   ),
   'dribbble': (
-    color: #ea4c89
+    background: #ea4c89
   ),
   'email': (
-    color: #000
+    background: #000
   ),
   'etsy': (
-    color: #f1641e
+    background: #f1641e
   ),
   'facebook': (
-    color: #1977f3
+    background: #1977f3
   ),
   'fbmessenger': (
-    color: #2998ff
+    background: #2998ff
   ),
   'flickr': (
-    color: #1c9be9
+    background: #1c9be9
   ),
   'github': (
-    color: #333
+    background: #333
   ),
   'gitlab': (
-    color: #f96424
+    background: #f96424
   ),
   'google': (
-    color: #3a7cec
+    background: #3a7cec
   ),
   'googleplus': (
-    color: #db483b
+    background: #db483b
   ),
   'hackernews': (
-    color: #ff6500
+    background: #ff6500
   ),
   'news.ycombinator': (
-    color: #ff6500
+    background: #ff6500
   ),
   'houzz': (
-    color: #4dbc15
+    background: #4dbc15
   ),
   'instagram': (
-    color: #e23367
+    background: #e23367
+  ),
+  'ko-fi': (
+    background: #00b9fe
+  ),
+  'liberapay': (
+    background: #f6c915,
+    color: #1a171b
   ),
   'line': (
-    color: #00c300
+    background: #00c300
   ),
   'linkedin': (
-    color: #0274b3
+    background: #0274b3
   ),
   'livejournal': (
-    color: #004359
+    background: #004359
   ),
   'medium': (
-    color: #02b875
+    background: #02b875
   ),
   'mix': (
-    color: #ff8226
+    background: #ff8226
   ),
   'odnoklassniki': (
-    color: #f2720c
+    background: #f2720c
   ),
   'ok.ru': (
-    color: #f2720c
+    background: #f2720c
   ),
   'patreon': (
-    color: #e85b46
+    background: #e85b46
   ),
   'paypal': (
-    color: #0070ba
+    background: #0070ba
   ),
   'pdf': (
-    color: #e61b2e
+    background: #e61b2e
   ),
   'phone': (
-    color: #1a73e8
+    background: #1a73e8
   ),
   'pinterest': (
-    color: #cb2027
+    background: #cb2027
   ),
   'pocket': (
-    color: #ef4056
+    background: #ef4056
   ),
   'print': (
-    color: #6d9f00
+    background: #6d9f00
   ),
   'reddit': (
-    color: #ff5600
+    background: #ff5600
   ),
   'renren': (
-    color: #005eac
+    background: #005eac
   ),
   'rss': (
-    color: #ff7b0a
+    background: #ff7b0a
   ),
   'shortlink': (
-    color: #333
+    background: #333
   ),
   'skype': (
-    color: #00aff0
+    background: #00aff0
   ),
   'sms': (
-    color: #35d54f
+    background: #35d54f
   ),
   'snapchat': (
-    color: #fffc00
+    background: #fffc00
   ),
   'soundcloud': (
-    color: #f50
+    background: #f50
   ),
   'stackoverflow': (
-    color: #f48024
+    background: #f48024
   ),
   'stumbleupon': (
-    color: #eb4823
+    background: #eb4823
   ),
   'quora': (
-    color: #b92b27
+    background: #b92b27
   ),
   'telegram': (
-    color: #179cde
+    background: #179cde
   ),
   't.me': (
-    color: #179cde
+    background: #179cde
   ),
   'tiktok': (
-    color: #010101
+    background: #010101
   ),
   'tumblr': (
-    color: #314358
+    background: #314358
   ),
   'twitch': (
-    color: #4b367c
+    background: #4b367c
   ),
   'twitter': (
-    color: #1da1f2
+    background: #1da1f2
   ),
   'viber': (
-    color: #574e92
+    background: #574e92
   ),
   'vimeo': (
-    color: #00adef
+    background: #00adef
   ),
   'vk': (
-    color: #4c75a3
+    background: #4c75a3
   ),
   'wechat': (
-    color: #7bb32e
+    background: #7bb32e
   ),
   'weibo': (
-    color: #e6162d
+    background: #e6162d
   ),
   'whatsapp': (
-    color: #60b82d
+    background: #60b82d
   ),
   'xing': (
-    color: #006567
+    background: #006567
   ),
   'yahoomail': (
-    color: #4a00a1
+    background: #4a00a1
   ),
   'youtube': (
-    color: #ff0000
+    background: #ff0000
   )
 );
 
@@ -199,8 +210,9 @@ a {
       @each $site, $prop in $sites {
         &[href*='#{$site}'] {
           color: hsl(0, 0%, 100%);
-          border-color: map-get($prop, 'color');
-          background-color: map-get($prop, 'color');
+          color: map-get($prop, 'color');
+          border-color: map-get($prop, 'background');
+          background-color: map-get($prop, 'background');
         }
       }
     }
