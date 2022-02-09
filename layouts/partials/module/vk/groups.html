@@ -72,9 +72,9 @@
 
                         {{ with (.id) }}
                           <li title='{{ i18n "vk.wall" }}' class="list-inline-item">
-                            <a class="btn btn-light btn-sm text-muted" href="#" data-bs-toggle="modal" data-bs-target="#modal-vk-wall-{{ . | int }}" role="button">
+                            <button type="button" class="btn btn-light btn-sm text-muted" data-bs-toggle="modal" data-bs-target="#modal-vk-wall-{{ . | int }}" role="button">
                               <i class="fas fa-book fa-fw"></i>
-                            </a>
+                            </button>
                           </li>
                         {{ end }}
 
