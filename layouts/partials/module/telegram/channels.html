@@ -2,7 +2,7 @@
 {{ $chat := (split ($.Site.Data.api.telegram.chat.name) ",") }}
 {{ $ts := (now.Unix) }}
 {{ $headers := (dict
-"User-Agent" (($.Site.Params.user_agent) | default "")
+"User-Agent" (($.Site.Data.api.user_agent) | default "")
 ) }}
 
 {{ $data := (newScratch) }}

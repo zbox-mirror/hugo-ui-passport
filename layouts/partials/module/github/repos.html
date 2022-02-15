@@ -1,7 +1,7 @@
 {{ $user := (($.Site.Data.api.github.user) | default "") }}
 {{ $ts := (now.Unix) }}
 {{ $headers := (dict
-"User-Agent" (($.Site.Params.user_agent) | default "")
+"User-Agent" (($.Site.Data.api.user_agent) | default "")
 "Authorization" (printf "token %s" (($.Site.Data.api.github.token) | base64Decode))
 ) }}
 
