@@ -17,26 +17,30 @@
       <div class="node-body">
         <div class="row row-cols-1 row-cols-lg-2">
           <div class="col">
-            <table class="table table-striped table-bordered align-middle">
-              <tbody>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered align-middle">
+                <tbody>
 
-              {{ range (first 15 .) }}
-                  {{ (partial "module/github/events.list" .) }}
-              {{ end }}
+                {{ range (first 15 .) }}
+                    {{ (partial "module/github/events.list" .) }}
+                {{ end }}
 
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div class="col">
-            <table class="table table-striped table-bordered align-middle">
-              <tbody>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered align-middle">
+                <tbody>
 
-              {{ range (first 15 (after 15 .)) }}
-                  {{ (partial "module/github/events.list" .) }}
-              {{ end }}
+                {{ range (first 15 (after 15 .)) }}
+                    {{ (partial "module/github/events.list" .) }}
+                {{ end }}
 
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

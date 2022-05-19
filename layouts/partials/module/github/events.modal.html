@@ -46,4 +46,24 @@
     </div>
   </article>
 
+{{ else }}
+
+  <article class="modal fade" id="modal-github-events-{{ ($id) }}" tabindex="-1" aria-labelledby="label-github-events-{{ ($id) }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="label-github-events-{{ ($id) }}">{{ $title }} / {{ (i18n "github.events") }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label='{{ (i18n "close") }}'></button>
+        </div>
+        <div class="modal-body">
+            {{ (partial "function/alert" (dict
+            "type" "warning"
+            "icon" "fas fa-triangle-exclamation"
+            "msg" "github.no_events"
+            )) }}
+        </div>
+      </div>
+    </div>
+  </article>
+
 {{ end }}

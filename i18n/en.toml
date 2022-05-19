@@ -115,6 +115,9 @@ other = "Not Confirmed"
 [github.events]
 other = "Events"
 
+[github.no_events]
+other = "No Events"
+
 [github.orgs]
 other = "Organizations"
 

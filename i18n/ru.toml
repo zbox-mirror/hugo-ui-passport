@@ -115,6 +115,9 @@ other = "Не подтверждено"
 [github.events]
 other = "События"
 
+[github.no_events]
+other = "Нет событий"
+
 [github.orgs]
 other = "Организации"
 
